@@ -1,4 +1,4 @@
-module avatar_proto
+module avatar-proto
 
 go 1.22.6
 
