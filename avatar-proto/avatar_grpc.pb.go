@@ -27,8 +27,8 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AvatarServiceClient interface {
-	SetAvatar(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[SetAvatarRequest, SetAvatarResponse], error)
-	GetAllAvatars(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[GetAllAvatarsRequest, GetAllAvatarsResponse], error)
+	SetAvatar(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[SetAvatarIn, SetAvatarOut], error)
+	GetAllAvatars(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[GetAllAvatarsIn, GetAllAvatarsOut], error)
 }
 
 type avatarServiceClient struct {
@@ -39,38 +39,38 @@ func NewAvatarServiceClient(cc grpc.ClientConnInterface) AvatarServiceClient {
 	return &avatarServiceClient{cc}
 }
 
-func (c *avatarServiceClient) SetAvatar(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[SetAvatarRequest, SetAvatarResponse], error) {
+func (c *avatarServiceClient) SetAvatar(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[SetAvatarIn, SetAvatarOut], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &AvatarService_ServiceDesc.Streams[0], AvatarService_SetAvatar_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &grpc.GenericClientStream[SetAvatarRequest, SetAvatarResponse]{ClientStream: stream}
+	x := &grpc.GenericClientStream[SetAvatarIn, SetAvatarOut]{ClientStream: stream}
 	return x, nil
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type AvatarService_SetAvatarClient = grpc.BidiStreamingClient[SetAvatarRequest, SetAvatarResponse]
+type AvatarService_SetAvatarClient = grpc.BidiStreamingClient[SetAvatarIn, SetAvatarOut]
 
-func (c *avatarServiceClient) GetAllAvatars(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[GetAllAvatarsRequest, GetAllAvatarsResponse], error) {
+func (c *avatarServiceClient) GetAllAvatars(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[GetAllAvatarsIn, GetAllAvatarsOut], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &AvatarService_ServiceDesc.Streams[1], AvatarService_GetAllAvatars_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &grpc.GenericClientStream[GetAllAvatarsRequest, GetAllAvatarsResponse]{ClientStream: stream}
+	x := &grpc.GenericClientStream[GetAllAvatarsIn, GetAllAvatarsOut]{ClientStream: stream}
 	return x, nil
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type AvatarService_GetAllAvatarsClient = grpc.BidiStreamingClient[GetAllAvatarsRequest, GetAllAvatarsResponse]
+type AvatarService_GetAllAvatarsClient = grpc.BidiStreamingClient[GetAllAvatarsIn, GetAllAvatarsOut]
 
 // AvatarServiceServer is the server API for AvatarService service.
 // All implementations must embed UnimplementedAvatarServiceServer
 // for forward compatibility.
 type AvatarServiceServer interface {
-	SetAvatar(grpc.BidiStreamingServer[SetAvatarRequest, SetAvatarResponse]) error
-	GetAllAvatars(grpc.BidiStreamingServer[GetAllAvatarsRequest, GetAllAvatarsResponse]) error
+	SetAvatar(grpc.BidiStreamingServer[SetAvatarIn, SetAvatarOut]) error
+	GetAllAvatars(grpc.BidiStreamingServer[GetAllAvatarsIn, GetAllAvatarsOut]) error
 	mustEmbedUnimplementedAvatarServiceServer()
 }
 
@@ -81,10 +81,10 @@ type AvatarServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedAvatarServiceServer struct{}
 
-func (UnimplementedAvatarServiceServer) SetAvatar(grpc.BidiStreamingServer[SetAvatarRequest, SetAvatarResponse]) error {
+func (UnimplementedAvatarServiceServer) SetAvatar(grpc.BidiStreamingServer[SetAvatarIn, SetAvatarOut]) error {
 	return status.Errorf(codes.Unimplemented, "method SetAvatar not implemented")
 }
-func (UnimplementedAvatarServiceServer) GetAllAvatars(grpc.BidiStreamingServer[GetAllAvatarsRequest, GetAllAvatarsResponse]) error {
+func (UnimplementedAvatarServiceServer) GetAllAvatars(grpc.BidiStreamingServer[GetAllAvatarsIn, GetAllAvatarsOut]) error {
 	return status.Errorf(codes.Unimplemented, "method GetAllAvatars not implemented")
 }
 func (UnimplementedAvatarServiceServer) mustEmbedUnimplementedAvatarServiceServer() {}
@@ -109,18 +109,18 @@ func RegisterAvatarServiceServer(s grpc.ServiceRegistrar, srv AvatarServiceServe
 }
 
 func _AvatarService_SetAvatar_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(AvatarServiceServer).SetAvatar(&grpc.GenericServerStream[SetAvatarRequest, SetAvatarResponse]{ServerStream: stream})
+	return srv.(AvatarServiceServer).SetAvatar(&grpc.GenericServerStream[SetAvatarIn, SetAvatarOut]{ServerStream: stream})
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type AvatarService_SetAvatarServer = grpc.BidiStreamingServer[SetAvatarRequest, SetAvatarResponse]
+type AvatarService_SetAvatarServer = grpc.BidiStreamingServer[SetAvatarIn, SetAvatarOut]
 
 func _AvatarService_GetAllAvatars_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(AvatarServiceServer).GetAllAvatars(&grpc.GenericServerStream[GetAllAvatarsRequest, GetAllAvatarsResponse]{ServerStream: stream})
+	return srv.(AvatarServiceServer).GetAllAvatars(&grpc.GenericServerStream[GetAllAvatarsIn, GetAllAvatarsOut]{ServerStream: stream})
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type AvatarService_GetAllAvatarsServer = grpc.BidiStreamingServer[GetAllAvatarsRequest, GetAllAvatarsResponse]
+type AvatarService_GetAllAvatarsServer = grpc.BidiStreamingServer[GetAllAvatarsIn, GetAllAvatarsOut]
 
 // AvatarService_ServiceDesc is the grpc.ServiceDesc for AvatarService service.
 // It's only intended for direct use with grpc.RegisterService,

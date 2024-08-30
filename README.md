@@ -4,10 +4,10 @@
 ## Table of Contents
 
 - [avatar.proto](#avatar-proto)
-    - [GetAllAvatarsRequest](#avatar-GetAllAvatarsRequest)
-    - [GetAllAvatarsResponse](#avatar-GetAllAvatarsResponse)
-    - [SetAvatarRequest](#avatar-SetAvatarRequest)
-    - [SetAvatarResponse](#avatar-SetAvatarResponse)
+    - [GetAllAvatarsIn](#avatar-GetAllAvatarsIn)
+    - [GetAllAvatarsOut](#avatar-GetAllAvatarsOut)
+    - [SetAvatarIn](#avatar-SetAvatarIn)
+    - [SetAvatarOut](#avatar-SetAvatarOut)
   
     - [AvatarService](#avatar-AvatarService)
   
@@ -22,9 +22,9 @@
 
 
 
-<a name="avatar-GetAllAvatarsRequest"></a>
+<a name="avatar-GetAllAvatarsIn"></a>
 
-### GetAllAvatarsRequest
+### GetAllAvatarsIn
 
 
 
@@ -37,9 +37,9 @@
 
 
 
-<a name="avatar-GetAllAvatarsResponse"></a>
+<a name="avatar-GetAllAvatarsOut"></a>
 
-### GetAllAvatarsResponse
+### GetAllAvatarsOut
 
 
 
@@ -52,9 +52,9 @@
 
 
 
-<a name="avatar-SetAvatarRequest"></a>
+<a name="avatar-SetAvatarIn"></a>
 
-### SetAvatarRequest
+### SetAvatarIn
 
 
 
@@ -68,9 +68,9 @@
 
 
 
-<a name="avatar-SetAvatarResponse"></a>
+<a name="avatar-SetAvatarOut"></a>
 
-### SetAvatarResponse
+### SetAvatarOut
 
 
 
@@ -96,8 +96,8 @@
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| SetAvatar | [SetAvatarRequest](#avatar-SetAvatarRequest) stream | [SetAvatarResponse](#avatar-SetAvatarResponse) stream |  |
-| GetAllAvatars | [GetAllAvatarsRequest](#avatar-GetAllAvatarsRequest) stream | [GetAllAvatarsResponse](#avatar-GetAllAvatarsResponse) stream |  |
+| SetAvatar | [SetAvatarIn](#avatar-SetAvatarIn) stream | [SetAvatarOut](#avatar-SetAvatarOut) stream |  |
+| GetAllAvatars | [GetAllAvatarsIn](#avatar-GetAllAvatarsIn) stream | [GetAllAvatarsOut](#avatar-GetAllAvatarsOut) stream |  |
 
  
 
