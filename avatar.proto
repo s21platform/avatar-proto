@@ -5,23 +5,23 @@ package avatar;
 option go_package = "./avatar-proto";
 
 service AvatarService {
-  rpc SetAvatar(stream SetAvatarRequest) returns (stream SetAvatarResponse);
-  rpc GetAllAvatars(stream GetAllAvatarsRequest) returns (stream GetAllAvatarsResponse);
+  rpc SetAvatar(stream SetAvatarIn) returns (stream SetAvatarOut);
+  rpc GetAllAvatars(stream GetAllAvatarsIn) returns (stream GetAllAvatarsOut);
 }
 
-message SetAvatarRequest {
+message SetAvatarIn {
   string user_uuid = 1;
   string filename = 2;
 }
 
-message SetAvatarResponse {
+message SetAvatarOut {
   string link = 1;
 }
 
-message GetAllAvatarsRequest {
+message GetAllAvatarsIn {
   string user_uuid = 1;
 }
 
-message GetAllAvatarsResponse {
+message GetAllAvatarsOut {
   repeated string avatar_list = 1;
 }
