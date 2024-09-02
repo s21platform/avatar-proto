@@ -96,8 +96,8 @@
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| SetAvatar | [SetAvatarIn](#avatar-SetAvatarIn) stream | [SetAvatarOut](#avatar-SetAvatarOut) stream |  |
-| GetAllAvatars | [GetAllAvatarsIn](#avatar-GetAllAvatarsIn) stream | [GetAllAvatarsOut](#avatar-GetAllAvatarsOut) stream |  |
+| SetAvatar | [SetAvatarIn](#avatar-SetAvatarIn) | [SetAvatarOut](#avatar-SetAvatarOut) |  |
+| GetAllAvatars | [GetAllAvatarsIn](#avatar-GetAllAvatarsIn) | [GetAllAvatarsOut](#avatar-GetAllAvatarsOut) |  |
 
  
 
