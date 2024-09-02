@@ -5,8 +5,8 @@ package avatar;
 option go_package = "./avatar-proto";
 
 service AvatarService {
-  rpc SetAvatar(stream SetAvatarIn) returns (stream SetAvatarOut);
-  rpc GetAllAvatars(stream GetAllAvatarsIn) returns (stream GetAllAvatarsOut);
+  rpc SetAvatar(SetAvatarIn) returns (SetAvatarOut){};
+  rpc GetAllAvatars(GetAllAvatarsIn) returns (GetAllAvatarsOut){};
 }
 
 message SetAvatarIn {

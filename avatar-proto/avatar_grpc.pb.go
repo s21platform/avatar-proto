@@ -27,8 +27,8 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AvatarServiceClient interface {
-	SetAvatar(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[SetAvatarIn, SetAvatarOut], error)
-	GetAllAvatars(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[GetAllAvatarsIn, GetAllAvatarsOut], error)
+	SetAvatar(ctx context.Context, in *SetAvatarIn, opts ...grpc.CallOption) (*SetAvatarOut, error)
+	GetAllAvatars(ctx context.Context, in *GetAllAvatarsIn, opts ...grpc.CallOption) (*GetAllAvatarsOut, error)
 }
 
 type avatarServiceClient struct {
@@ -39,38 +39,32 @@ func NewAvatarServiceClient(cc grpc.ClientConnInterface) AvatarServiceClient {
 	return &avatarServiceClient{cc}
 }
 
-func (c *avatarServiceClient) SetAvatar(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[SetAvatarIn, SetAvatarOut], error) {
+func (c *avatarServiceClient) SetAvatar(ctx context.Context, in *SetAvatarIn, opts ...grpc.CallOption) (*SetAvatarOut, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &AvatarService_ServiceDesc.Streams[0], AvatarService_SetAvatar_FullMethodName, cOpts...)
+	out := new(SetAvatarOut)
+	err := c.cc.Invoke(ctx, AvatarService_SetAvatar_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &grpc.GenericClientStream[SetAvatarIn, SetAvatarOut]{ClientStream: stream}
-	return x, nil
+	return out, nil
 }
 
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type AvatarService_SetAvatarClient = grpc.BidiStreamingClient[SetAvatarIn, SetAvatarOut]
-
-func (c *avatarServiceClient) GetAllAvatars(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[GetAllAvatarsIn, GetAllAvatarsOut], error) {
+func (c *avatarServiceClient) GetAllAvatars(ctx context.Context, in *GetAllAvatarsIn, opts ...grpc.CallOption) (*GetAllAvatarsOut, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &AvatarService_ServiceDesc.Streams[1], AvatarService_GetAllAvatars_FullMethodName, cOpts...)
+	out := new(GetAllAvatarsOut)
+	err := c.cc.Invoke(ctx, AvatarService_GetAllAvatars_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &grpc.GenericClientStream[GetAllAvatarsIn, GetAllAvatarsOut]{ClientStream: stream}
-	return x, nil
+	return out, nil
 }
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type AvatarService_GetAllAvatarsClient = grpc.BidiStreamingClient[GetAllAvatarsIn, GetAllAvatarsOut]
 
 // AvatarServiceServer is the server API for AvatarService service.
 // All implementations must embed UnimplementedAvatarServiceServer
 // for forward compatibility.
 type AvatarServiceServer interface {
-	SetAvatar(grpc.BidiStreamingServer[SetAvatarIn, SetAvatarOut]) error
-	GetAllAvatars(grpc.BidiStreamingServer[GetAllAvatarsIn, GetAllAvatarsOut]) error
+	SetAvatar(context.Context, *SetAvatarIn) (*SetAvatarOut, error)
+	GetAllAvatars(context.Context, *GetAllAvatarsIn) (*GetAllAvatarsOut, error)
 	mustEmbedUnimplementedAvatarServiceServer()
 }
 
@@ -81,11 +75,11 @@ type AvatarServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedAvatarServiceServer struct{}
 
-func (UnimplementedAvatarServiceServer) SetAvatar(grpc.BidiStreamingServer[SetAvatarIn, SetAvatarOut]) error {
-	return status.Errorf(codes.Unimplemented, "method SetAvatar not implemented")
+func (UnimplementedAvatarServiceServer) SetAvatar(context.Context, *SetAvatarIn) (*SetAvatarOut, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetAvatar not implemented")
 }
-func (UnimplementedAvatarServiceServer) GetAllAvatars(grpc.BidiStreamingServer[GetAllAvatarsIn, GetAllAvatarsOut]) error {
-	return status.Errorf(codes.Unimplemented, "method GetAllAvatars not implemented")
+func (UnimplementedAvatarServiceServer) GetAllAvatars(context.Context, *GetAllAvatarsIn) (*GetAllAvatarsOut, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllAvatars not implemented")
 }
 func (UnimplementedAvatarServiceServer) mustEmbedUnimplementedAvatarServiceServer() {}
 func (UnimplementedAvatarServiceServer) testEmbeddedByValue()                       {}
@@ -108,19 +102,41 @@ func RegisterAvatarServiceServer(s grpc.ServiceRegistrar, srv AvatarServiceServe
 	s.RegisterService(&AvatarService_ServiceDesc, srv)
 }
 
-func _AvatarService_SetAvatar_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(AvatarServiceServer).SetAvatar(&grpc.GenericServerStream[SetAvatarIn, SetAvatarOut]{ServerStream: stream})
+func _AvatarService_SetAvatar_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetAvatarIn)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AvatarServiceServer).SetAvatar(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AvatarService_SetAvatar_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AvatarServiceServer).SetAvatar(ctx, req.(*SetAvatarIn))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type AvatarService_SetAvatarServer = grpc.BidiStreamingServer[SetAvatarIn, SetAvatarOut]
-
-func _AvatarService_GetAllAvatars_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(AvatarServiceServer).GetAllAvatars(&grpc.GenericServerStream[GetAllAvatarsIn, GetAllAvatarsOut]{ServerStream: stream})
+func _AvatarService_GetAllAvatars_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAllAvatarsIn)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AvatarServiceServer).GetAllAvatars(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AvatarService_GetAllAvatars_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AvatarServiceServer).GetAllAvatars(ctx, req.(*GetAllAvatarsIn))
+	}
+	return interceptor(ctx, in, info, handler)
 }
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type AvatarService_GetAllAvatarsServer = grpc.BidiStreamingServer[GetAllAvatarsIn, GetAllAvatarsOut]
 
 // AvatarService_ServiceDesc is the grpc.ServiceDesc for AvatarService service.
 // It's only intended for direct use with grpc.RegisterService,
@@ -128,20 +144,16 @@ type AvatarService_GetAllAvatarsServer = grpc.BidiStreamingServer[GetAllAvatarsI
 var AvatarService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "avatar.AvatarService",
 	HandlerType: (*AvatarServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
-	Streams: []grpc.StreamDesc{
+	Methods: []grpc.MethodDesc{
 		{
-			StreamName:    "SetAvatar",
-			Handler:       _AvatarService_SetAvatar_Handler,
-			ServerStreams: true,
-			ClientStreams: true,
+			MethodName: "SetAvatar",
+			Handler:    _AvatarService_SetAvatar_Handler,
 		},
 		{
-			StreamName:    "GetAllAvatars",
-			Handler:       _AvatarService_GetAllAvatars_Handler,
-			ServerStreams: true,
-			ClientStreams: true,
+			MethodName: "GetAllAvatars",
+			Handler:    _AvatarService_GetAllAvatars_Handler,
 		},
 	},
+	Streams:  []grpc.StreamDesc{},
 	Metadata: "avatar.proto",
 }
