@@ -62,6 +62,7 @@
 | ----- | ---- | ----- | ----------- |
 | user_uuid | [string](#string) |  |  |
 | filename | [string](#string) |  |  |
+| batch | [bytes](#bytes) |  |  |
 
 
 
@@ -96,7 +97,7 @@
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| SetAvatar | [SetAvatarIn](#avatar-SetAvatarIn) | [SetAvatarOut](#avatar-SetAvatarOut) |  |
+| SetAvatar | [SetAvatarIn](#avatar-SetAvatarIn) stream | [SetAvatarOut](#avatar-SetAvatarOut) |  |
 | GetAllAvatars | [GetAllAvatarsIn](#avatar-GetAllAvatarsIn) | [GetAllAvatarsOut](#avatar-GetAllAvatarsOut) |  |
 
  
