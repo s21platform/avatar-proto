@@ -3,6 +3,6 @@ syntax = "proto3";
 option go_package = "avatar-proto/new_avatar_notification";
 
 message NewAvatarNotification {
-  string user_uuid = 1;
+  string uuid = 1;
   string link = 2;
 }
