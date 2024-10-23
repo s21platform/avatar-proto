@@ -23,6 +23,11 @@ message GetAllAvatarsIn {
   string user_uuid = 1;
 }
 
+message Avatar {
+  string id = 1;
+  string link = 2;
+}
+
 message GetAllAvatarsOut {
-  repeated string avatar_list = 1;
+  repeated Avatar avatar_list = 1;
 }

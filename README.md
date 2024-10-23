@@ -4,6 +4,7 @@
 ## Table of Contents
 
 - [avatar.proto](#avatar-proto)
+    - [Avatar](#avatar-Avatar)
     - [GetAllAvatarsIn](#avatar-GetAllAvatarsIn)
     - [GetAllAvatarsOut](#avatar-GetAllAvatarsOut)
     - [SetAvatarIn](#avatar-SetAvatarIn)
@@ -19,6 +20,22 @@
 <p align="right"><a href="#top">Top</a></p>
 
 ## avatar.proto
+
+
+
+<a name="avatar-Avatar"></a>
+
+### Avatar
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [string](#string) |  |  |
+| link | [string](#string) |  |  |
+
+
+
 
 
 
@@ -45,7 +62,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| avatar_list | [string](#string) | repeated |  |
+| avatar_list | [Avatar](#avatar-Avatar) | repeated |  |
 
 
 
