@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	AvatarService_SetAvatar_FullMethodName     = "/avatar.AvatarService/SetAvatar"
 	AvatarService_GetAllAvatars_FullMethodName = "/avatar.AvatarService/GetAllAvatars"
+	AvatarService_DeleteAvatar_FullMethodName  = "/avatar.AvatarService/DeleteAvatar"
 )
 
 // AvatarServiceClient is the client API for AvatarService service.
@@ -29,6 +30,7 @@ const (
 type AvatarServiceClient interface {
 	SetAvatar(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[SetAvatarIn, SetAvatarOut], error)
 	GetAllAvatars(ctx context.Context, in *GetAllAvatarsIn, opts ...grpc.CallOption) (*GetAllAvatarsOut, error)
+	DeleteAvatar(ctx context.Context, in *DeleteAvatarIn, opts ...grpc.CallOption) (*DeleteAvatarOut, error)
 }
 
 type avatarServiceClient struct {
@@ -62,12 +64,23 @@ func (c *avatarServiceClient) GetAllAvatars(ctx context.Context, in *GetAllAvata
 	return out, nil
 }
 
+func (c *avatarServiceClient) DeleteAvatar(ctx context.Context, in *DeleteAvatarIn, opts ...grpc.CallOption) (*DeleteAvatarOut, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteAvatarOut)
+	err := c.cc.Invoke(ctx, AvatarService_DeleteAvatar_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AvatarServiceServer is the server API for AvatarService service.
 // All implementations must embed UnimplementedAvatarServiceServer
 // for forward compatibility.
 type AvatarServiceServer interface {
 	SetAvatar(grpc.ClientStreamingServer[SetAvatarIn, SetAvatarOut]) error
 	GetAllAvatars(context.Context, *GetAllAvatarsIn) (*GetAllAvatarsOut, error)
+	DeleteAvatar(context.Context, *DeleteAvatarIn) (*DeleteAvatarOut, error)
 	mustEmbedUnimplementedAvatarServiceServer()
 }
 
@@ -83,6 +96,9 @@ func (UnimplementedAvatarServiceServer) SetAvatar(grpc.ClientStreamingServer[Set
 }
 func (UnimplementedAvatarServiceServer) GetAllAvatars(context.Context, *GetAllAvatarsIn) (*GetAllAvatarsOut, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAllAvatars not implemented")
+}
+func (UnimplementedAvatarServiceServer) DeleteAvatar(context.Context, *DeleteAvatarIn) (*DeleteAvatarOut, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAvatar not implemented")
 }
 func (UnimplementedAvatarServiceServer) mustEmbedUnimplementedAvatarServiceServer() {}
 func (UnimplementedAvatarServiceServer) testEmbeddedByValue()                       {}
@@ -130,6 +146,24 @@ func _AvatarService_GetAllAvatars_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AvatarService_DeleteAvatar_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteAvatarIn)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AvatarServiceServer).DeleteAvatar(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AvatarService_DeleteAvatar_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AvatarServiceServer).DeleteAvatar(ctx, req.(*DeleteAvatarIn))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AvatarService_ServiceDesc is the grpc.ServiceDesc for AvatarService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -140,6 +174,10 @@ var AvatarService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAllAvatars",
 			Handler:    _AvatarService_GetAllAvatars_Handler,
+		},
+		{
+			MethodName: "DeleteAvatar",
+			Handler:    _AvatarService_DeleteAvatar_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

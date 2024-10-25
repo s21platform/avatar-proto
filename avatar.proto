@@ -7,6 +7,7 @@ option go_package = "./avatar-proto";
 service AvatarService {
   rpc SetAvatar(stream SetAvatarIn) returns (SetAvatarOut){};
   rpc GetAllAvatars(GetAllAvatarsIn) returns (GetAllAvatarsOut){};
+  rpc DeleteAvatar(DeleteAvatarIn) returns (DeleteAvatarOut){};
 }
 
 message SetAvatarIn {
@@ -30,4 +31,14 @@ message Avatar {
 
 message GetAllAvatarsOut {
   repeated Avatar avatar_list = 1;
+}
+
+message DeleteAvatarIn {
+  string uuid = 1;
+  string avatar_id = 2;
+}
+
+message DeleteAvatarOut {
+  string uuid = 1;
+  string avatar_id = 2;
 }
