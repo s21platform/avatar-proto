@@ -5,6 +5,7 @@
 
 - [avatar.proto](#avatar-proto)
     - [Avatar](#avatar-Avatar)
+    - [DeleteAvatarIn](#avatar-DeleteAvatarIn)
     - [GetAllAvatarsIn](#avatar-GetAllAvatarsIn)
     - [GetAllAvatarsOut](#avatar-GetAllAvatarsOut)
     - [SetAvatarIn](#avatar-SetAvatarIn)
@@ -33,6 +34,21 @@
 | ----- | ---- | ----- | ----------- |
 | id | [string](#string) |  |  |
 | link | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="avatar-DeleteAvatarIn"></a>
+
+### DeleteAvatarIn
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| avatar_id | [string](#string) |  |  |
 
 
 
@@ -116,6 +132,7 @@
 | ----------- | ------------ | ------------- | ------------|
 | SetAvatar | [SetAvatarIn](#avatar-SetAvatarIn) stream | [SetAvatarOut](#avatar-SetAvatarOut) |  |
 | GetAllAvatars | [GetAllAvatarsIn](#avatar-GetAllAvatarsIn) | [GetAllAvatarsOut](#avatar-GetAllAvatarsOut) |  |
+| DeleteAvatar | [DeleteAvatarIn](#avatar-DeleteAvatarIn) | [Avatar](#avatar-Avatar) |  |
 
  
 
