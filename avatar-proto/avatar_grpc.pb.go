@@ -30,7 +30,7 @@ const (
 type AvatarServiceClient interface {
 	SetAvatar(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[SetAvatarIn, SetAvatarOut], error)
 	GetAllAvatars(ctx context.Context, in *GetAllAvatarsIn, opts ...grpc.CallOption) (*GetAllAvatarsOut, error)
-	DeleteAvatar(ctx context.Context, in *DeleteAvatarIn, opts ...grpc.CallOption) (*DeleteAvatarOut, error)
+	DeleteAvatar(ctx context.Context, in *DeleteAvatarIn, opts ...grpc.CallOption) (*Avatar, error)
 }
 
 type avatarServiceClient struct {
@@ -64,9 +64,9 @@ func (c *avatarServiceClient) GetAllAvatars(ctx context.Context, in *GetAllAvata
 	return out, nil
 }
 
-func (c *avatarServiceClient) DeleteAvatar(ctx context.Context, in *DeleteAvatarIn, opts ...grpc.CallOption) (*DeleteAvatarOut, error) {
+func (c *avatarServiceClient) DeleteAvatar(ctx context.Context, in *DeleteAvatarIn, opts ...grpc.CallOption) (*Avatar, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DeleteAvatarOut)
+	out := new(Avatar)
 	err := c.cc.Invoke(ctx, AvatarService_DeleteAvatar_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -80,7 +80,7 @@ func (c *avatarServiceClient) DeleteAvatar(ctx context.Context, in *DeleteAvatar
 type AvatarServiceServer interface {
 	SetAvatar(grpc.ClientStreamingServer[SetAvatarIn, SetAvatarOut]) error
 	GetAllAvatars(context.Context, *GetAllAvatarsIn) (*GetAllAvatarsOut, error)
-	DeleteAvatar(context.Context, *DeleteAvatarIn) (*DeleteAvatarOut, error)
+	DeleteAvatar(context.Context, *DeleteAvatarIn) (*Avatar, error)
 	mustEmbedUnimplementedAvatarServiceServer()
 }
 
@@ -97,7 +97,7 @@ func (UnimplementedAvatarServiceServer) SetAvatar(grpc.ClientStreamingServer[Set
 func (UnimplementedAvatarServiceServer) GetAllAvatars(context.Context, *GetAllAvatarsIn) (*GetAllAvatarsOut, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAllAvatars not implemented")
 }
-func (UnimplementedAvatarServiceServer) DeleteAvatar(context.Context, *DeleteAvatarIn) (*DeleteAvatarOut, error) {
+func (UnimplementedAvatarServiceServer) DeleteAvatar(context.Context, *DeleteAvatarIn) (*Avatar, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAvatar not implemented")
 }
 func (UnimplementedAvatarServiceServer) mustEmbedUnimplementedAvatarServiceServer() {}
