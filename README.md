@@ -49,7 +49,6 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| uuid | [string](#string) |  |  |
 | avatar_id | [string](#string) |  |  |
 
 
@@ -65,8 +64,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| uuid | [string](#string) |  |  |
-| avatar_id | [string](#string) |  |  |
+| deleted_avatar | [Avatar](#avatar-Avatar) |  |  |
 
 
 

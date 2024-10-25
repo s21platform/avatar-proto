@@ -34,11 +34,9 @@ message GetAllAvatarsOut {
 }
 
 message DeleteAvatarIn {
-  string uuid = 1;
-  string avatar_id = 2;
+  string avatar_id = 1;
 }
 
 message DeleteAvatarOut {
-  string uuid = 1;
-  string avatar_id = 2;
+  Avatar deleted_avatar = 1;
 }
