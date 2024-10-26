@@ -32,7 +32,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| id | [string](#string) |  |  |
+| id | [int32](#int32) |  |  |
 | link | [string](#string) |  |  |
 
 
