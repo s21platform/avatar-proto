@@ -48,7 +48,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| avatar_id | [string](#string) |  |  |
+| avatar_id | [int32](#int32) |  |  |
 
 
 

@@ -34,5 +34,5 @@ message GetAllAvatarsOut {
 }
 
 message DeleteAvatarIn {
-  string avatar_id = 1;
+  int32 avatar_id = 1;
 }
