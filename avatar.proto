@@ -11,9 +11,10 @@ service AvatarService {
 }
 
 message SetAvatarIn {
-  string user_uuid = 1;
+  string uuid = 1;
   string filename = 2;
   bytes batch = 3;
+  string avatar_type = 4;
 }
 
 message SetAvatarOut {
@@ -21,7 +22,8 @@ message SetAvatarOut {
 }
 
 message GetAllAvatarsIn {
-  string user_uuid = 1;
+  string uuid = 1;
+  string avatar_type = 2;
 }
 
 message Avatar {
@@ -35,4 +37,5 @@ message GetAllAvatarsOut {
 
 message DeleteAvatarIn {
   int32 avatar_id = 1;
+  string avatar_type = 2;
 }

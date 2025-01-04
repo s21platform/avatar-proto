@@ -49,6 +49,7 @@
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | avatar_id | [int32](#int32) |  |  |
+| avatar_type | [string](#string) |  |  |
 
 
 
@@ -63,7 +64,8 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| user_uuid | [string](#string) |  |  |
+| uuid | [string](#string) |  |  |
+| avatar_type | [string](#string) |  |  |
 
 
 
@@ -93,9 +95,10 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| user_uuid | [string](#string) |  |  |
+| uuid | [string](#string) |  |  |
 | filename | [string](#string) |  |  |
 | batch | [bytes](#bytes) |  |  |
+| avatar_type | [string](#string) |  |  |
 
 
 
