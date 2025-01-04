@@ -5,23 +5,27 @@ package avatar;
 option go_package = "./avatar-proto";
 
 service AvatarService {
-  rpc SetAvatar(stream SetAvatarIn) returns (SetAvatarOut){};
-  rpc GetAllAvatars(GetAllAvatarsIn) returns (GetAllAvatarsOut){};
-  rpc DeleteAvatar(DeleteAvatarIn) returns (Avatar){};
+  rpc SetUserAvatar(stream SetUserAvatarIn) returns (SetUserAvatarOut){};
+  rpc GetAllUserAvatars(GetAllUserAvatarsIn) returns (GetAllUserAvatarsOut){};
+  rpc DeleteUserAvatar(DeleteUserAvatarIn) returns (Avatar){};
+
+  rpc SetSocietyAvatar(stream SetSocietyAvatarIn) returns (SetSocietyAvatarOut){};
+  rpc GetAllSocietyAvatars(GetAllSocietyAvatarsIn) returns (GetAllSocietyAvatarsOut){};
+  rpc DeleteSocietyAvatar(DeleteSocietyAvatarIn) returns (Avatar){};
 }
 
-message SetAvatarIn {
-  string user_uuid = 1;
+message SetUserAvatarIn {
+  string uuid = 1;
   string filename = 2;
   bytes batch = 3;
 }
 
-message SetAvatarOut {
+message SetUserAvatarOut {
   string link = 1;
 }
 
-message GetAllAvatarsIn {
-  string user_uuid = 1;
+message GetAllUserAvatarsIn {
+  string uuid = 1;
 }
 
 message Avatar {
@@ -29,10 +33,32 @@ message Avatar {
   string link = 2;
 }
 
-message GetAllAvatarsOut {
+message GetAllUserAvatarsOut {
   repeated Avatar avatar_list = 1;
 }
 
-message DeleteAvatarIn {
+message DeleteUserAvatarIn {
+  int32 avatar_id = 1;
+}
+
+message SetSocietyAvatarIn {
+  string uuid = 1;
+  string filename = 2;
+  bytes batch = 3;
+}
+
+message SetSocietyAvatarOut {
+  string link = 1;
+}
+
+message GetAllSocietyAvatarsIn {
+  string uuid = 1;
+}
+
+message GetAllSocietyAvatarsOut {
+  repeated Avatar avatar_list = 1;
+}
+
+message DeleteSocietyAvatarIn {
   int32 avatar_id = 1;
 }
