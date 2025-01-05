@@ -19,9 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AvatarService_SetUserAvatar_FullMethodName        = "/avatar.AvatarService/SetUserAvatar"
-	AvatarService_GetAllUserAvatars_FullMethodName    = "/avatar.AvatarService/GetAllUserAvatars"
-	AvatarService_DeleteUserAvatar_FullMethodName     = "/avatar.AvatarService/DeleteUserAvatar"
+	AvatarService_SetAvatar_FullMethodName            = "/avatar.AvatarService/SetAvatar"
+	AvatarService_GetAllAvatars_FullMethodName        = "/avatar.AvatarService/GetAllAvatars"
+	AvatarService_DeleteAvatar_FullMethodName         = "/avatar.AvatarService/DeleteAvatar"
 	AvatarService_SetSocietyAvatar_FullMethodName     = "/avatar.AvatarService/SetSocietyAvatar"
 	AvatarService_GetAllSocietyAvatars_FullMethodName = "/avatar.AvatarService/GetAllSocietyAvatars"
 	AvatarService_DeleteSocietyAvatar_FullMethodName  = "/avatar.AvatarService/DeleteSocietyAvatar"
@@ -31,9 +31,9 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AvatarServiceClient interface {
-	SetUserAvatar(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[SetUserAvatarIn, SetUserAvatarOut], error)
-	GetAllUserAvatars(ctx context.Context, in *GetAllUserAvatarsIn, opts ...grpc.CallOption) (*GetAllUserAvatarsOut, error)
-	DeleteUserAvatar(ctx context.Context, in *DeleteUserAvatarIn, opts ...grpc.CallOption) (*Avatar, error)
+	SetAvatar(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[SetAvatarIn, SetAvatarOut], error)
+	GetAllAvatars(ctx context.Context, in *GetAllAvatarsIn, opts ...grpc.CallOption) (*GetAllAvatarsOut, error)
+	DeleteAvatar(ctx context.Context, in *DeleteAvatarIn, opts ...grpc.CallOption) (*Avatar, error)
 	SetSocietyAvatar(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[SetSocietyAvatarIn, SetSocietyAvatarOut], error)
 	GetAllSocietyAvatars(ctx context.Context, in *GetAllSocietyAvatarsIn, opts ...grpc.CallOption) (*GetAllSocietyAvatarsOut, error)
 	DeleteSocietyAvatar(ctx context.Context, in *DeleteSocietyAvatarIn, opts ...grpc.CallOption) (*Avatar, error)
@@ -47,33 +47,33 @@ func NewAvatarServiceClient(cc grpc.ClientConnInterface) AvatarServiceClient {
 	return &avatarServiceClient{cc}
 }
 
-func (c *avatarServiceClient) SetUserAvatar(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[SetUserAvatarIn, SetUserAvatarOut], error) {
+func (c *avatarServiceClient) SetAvatar(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[SetAvatarIn, SetAvatarOut], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &AvatarService_ServiceDesc.Streams[0], AvatarService_SetUserAvatar_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &AvatarService_ServiceDesc.Streams[0], AvatarService_SetAvatar_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &grpc.GenericClientStream[SetUserAvatarIn, SetUserAvatarOut]{ClientStream: stream}
+	x := &grpc.GenericClientStream[SetAvatarIn, SetAvatarOut]{ClientStream: stream}
 	return x, nil
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type AvatarService_SetUserAvatarClient = grpc.ClientStreamingClient[SetUserAvatarIn, SetUserAvatarOut]
+type AvatarService_SetAvatarClient = grpc.ClientStreamingClient[SetAvatarIn, SetAvatarOut]
 
-func (c *avatarServiceClient) GetAllUserAvatars(ctx context.Context, in *GetAllUserAvatarsIn, opts ...grpc.CallOption) (*GetAllUserAvatarsOut, error) {
+func (c *avatarServiceClient) GetAllAvatars(ctx context.Context, in *GetAllAvatarsIn, opts ...grpc.CallOption) (*GetAllAvatarsOut, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetAllUserAvatarsOut)
-	err := c.cc.Invoke(ctx, AvatarService_GetAllUserAvatars_FullMethodName, in, out, cOpts...)
+	out := new(GetAllAvatarsOut)
+	err := c.cc.Invoke(ctx, AvatarService_GetAllAvatars_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *avatarServiceClient) DeleteUserAvatar(ctx context.Context, in *DeleteUserAvatarIn, opts ...grpc.CallOption) (*Avatar, error) {
+func (c *avatarServiceClient) DeleteAvatar(ctx context.Context, in *DeleteAvatarIn, opts ...grpc.CallOption) (*Avatar, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Avatar)
-	err := c.cc.Invoke(ctx, AvatarService_DeleteUserAvatar_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, AvatarService_DeleteAvatar_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -117,9 +117,9 @@ func (c *avatarServiceClient) DeleteSocietyAvatar(ctx context.Context, in *Delet
 // All implementations must embed UnimplementedAvatarServiceServer
 // for forward compatibility.
 type AvatarServiceServer interface {
-	SetUserAvatar(grpc.ClientStreamingServer[SetUserAvatarIn, SetUserAvatarOut]) error
-	GetAllUserAvatars(context.Context, *GetAllUserAvatarsIn) (*GetAllUserAvatarsOut, error)
-	DeleteUserAvatar(context.Context, *DeleteUserAvatarIn) (*Avatar, error)
+	SetAvatar(grpc.ClientStreamingServer[SetAvatarIn, SetAvatarOut]) error
+	GetAllAvatars(context.Context, *GetAllAvatarsIn) (*GetAllAvatarsOut, error)
+	DeleteAvatar(context.Context, *DeleteAvatarIn) (*Avatar, error)
 	SetSocietyAvatar(grpc.ClientStreamingServer[SetSocietyAvatarIn, SetSocietyAvatarOut]) error
 	GetAllSocietyAvatars(context.Context, *GetAllSocietyAvatarsIn) (*GetAllSocietyAvatarsOut, error)
 	DeleteSocietyAvatar(context.Context, *DeleteSocietyAvatarIn) (*Avatar, error)
@@ -133,14 +133,14 @@ type AvatarServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedAvatarServiceServer struct{}
 
-func (UnimplementedAvatarServiceServer) SetUserAvatar(grpc.ClientStreamingServer[SetUserAvatarIn, SetUserAvatarOut]) error {
-	return status.Errorf(codes.Unimplemented, "method SetUserAvatar not implemented")
+func (UnimplementedAvatarServiceServer) SetAvatar(grpc.ClientStreamingServer[SetAvatarIn, SetAvatarOut]) error {
+	return status.Errorf(codes.Unimplemented, "method SetAvatar not implemented")
 }
-func (UnimplementedAvatarServiceServer) GetAllUserAvatars(context.Context, *GetAllUserAvatarsIn) (*GetAllUserAvatarsOut, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAllUserAvatars not implemented")
+func (UnimplementedAvatarServiceServer) GetAllAvatars(context.Context, *GetAllAvatarsIn) (*GetAllAvatarsOut, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllAvatars not implemented")
 }
-func (UnimplementedAvatarServiceServer) DeleteUserAvatar(context.Context, *DeleteUserAvatarIn) (*Avatar, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteUserAvatar not implemented")
+func (UnimplementedAvatarServiceServer) DeleteAvatar(context.Context, *DeleteAvatarIn) (*Avatar, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAvatar not implemented")
 }
 func (UnimplementedAvatarServiceServer) SetSocietyAvatar(grpc.ClientStreamingServer[SetSocietyAvatarIn, SetSocietyAvatarOut]) error {
 	return status.Errorf(codes.Unimplemented, "method SetSocietyAvatar not implemented")
@@ -172,45 +172,45 @@ func RegisterAvatarServiceServer(s grpc.ServiceRegistrar, srv AvatarServiceServe
 	s.RegisterService(&AvatarService_ServiceDesc, srv)
 }
 
-func _AvatarService_SetUserAvatar_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(AvatarServiceServer).SetUserAvatar(&grpc.GenericServerStream[SetUserAvatarIn, SetUserAvatarOut]{ServerStream: stream})
+func _AvatarService_SetAvatar_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(AvatarServiceServer).SetAvatar(&grpc.GenericServerStream[SetAvatarIn, SetAvatarOut]{ServerStream: stream})
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type AvatarService_SetUserAvatarServer = grpc.ClientStreamingServer[SetUserAvatarIn, SetUserAvatarOut]
+type AvatarService_SetAvatarServer = grpc.ClientStreamingServer[SetAvatarIn, SetAvatarOut]
 
-func _AvatarService_GetAllUserAvatars_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAllUserAvatarsIn)
+func _AvatarService_GetAllAvatars_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAllAvatarsIn)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AvatarServiceServer).GetAllUserAvatars(ctx, in)
+		return srv.(AvatarServiceServer).GetAllAvatars(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AvatarService_GetAllUserAvatars_FullMethodName,
+		FullMethod: AvatarService_GetAllAvatars_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AvatarServiceServer).GetAllUserAvatars(ctx, req.(*GetAllUserAvatarsIn))
+		return srv.(AvatarServiceServer).GetAllAvatars(ctx, req.(*GetAllAvatarsIn))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AvatarService_DeleteUserAvatar_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteUserAvatarIn)
+func _AvatarService_DeleteAvatar_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteAvatarIn)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AvatarServiceServer).DeleteUserAvatar(ctx, in)
+		return srv.(AvatarServiceServer).DeleteAvatar(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AvatarService_DeleteUserAvatar_FullMethodName,
+		FullMethod: AvatarService_DeleteAvatar_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AvatarServiceServer).DeleteUserAvatar(ctx, req.(*DeleteUserAvatarIn))
+		return srv.(AvatarServiceServer).DeleteAvatar(ctx, req.(*DeleteAvatarIn))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -266,12 +266,12 @@ var AvatarService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*AvatarServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetAllUserAvatars",
-			Handler:    _AvatarService_GetAllUserAvatars_Handler,
+			MethodName: "GetAllAvatars",
+			Handler:    _AvatarService_GetAllAvatars_Handler,
 		},
 		{
-			MethodName: "DeleteUserAvatar",
-			Handler:    _AvatarService_DeleteUserAvatar_Handler,
+			MethodName: "DeleteAvatar",
+			Handler:    _AvatarService_DeleteAvatar_Handler,
 		},
 		{
 			MethodName: "GetAllSocietyAvatars",
@@ -284,8 +284,8 @@ var AvatarService_ServiceDesc = grpc.ServiceDesc{
 	},
 	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "SetUserAvatar",
-			Handler:       _AvatarService_SetUserAvatar_Handler,
+			StreamName:    "SetAvatar",
+			Handler:       _AvatarService_SetAvatar_Handler,
 			ClientStreams: true,
 		},
 		{
