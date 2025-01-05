@@ -113,7 +113,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| user_uuid | [string](#string) |  |  |
+| uuid | [string](#string) |  |  |
 
 
 
@@ -143,7 +143,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| user_user_uuid | [string](#string) |  |  |
+| user_uuid | [string](#string) |  |  |
 | filename | [string](#string) |  |  |
 | batch | [bytes](#bytes) |  |  |
 
@@ -175,7 +175,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| user_uuid | [string](#string) |  |  |
+| uuid | [string](#string) |  |  |
 | filename | [string](#string) |  |  |
 | batch | [bytes](#bytes) |  |  |
 

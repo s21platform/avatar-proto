@@ -15,7 +15,7 @@ service AvatarService {
 }
 
 message SetAvatarIn {
-  string user_user_uuid = 1;
+  string user_uuid = 1;
   string filename = 2;
   bytes batch = 3;
 }
@@ -42,7 +42,7 @@ message DeleteAvatarIn {
 }
 
 message SetSocietyAvatarIn {
-  string user_uuid = 1;
+  string uuid = 1;
   string filename = 2;
   bytes batch = 3;
 }
@@ -52,7 +52,7 @@ message SetSocietyAvatarOut {
 }
 
 message GetAllSocietyAvatarsIn {
-  string user_uuid = 1;
+  string uuid = 1;
 }
 
 message GetAllSocietyAvatarsOut {
