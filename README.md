@@ -6,10 +6,15 @@
 - [avatar.proto](#avatar-proto)
     - [Avatar](#avatar-Avatar)
     - [DeleteAvatarIn](#avatar-DeleteAvatarIn)
+    - [DeleteSocietyAvatarIn](#avatar-DeleteSocietyAvatarIn)
     - [GetAllAvatarsIn](#avatar-GetAllAvatarsIn)
     - [GetAllAvatarsOut](#avatar-GetAllAvatarsOut)
+    - [GetAllSocietyAvatarsIn](#avatar-GetAllSocietyAvatarsIn)
+    - [GetAllSocietyAvatarsOut](#avatar-GetAllSocietyAvatarsOut)
     - [SetAvatarIn](#avatar-SetAvatarIn)
     - [SetAvatarOut](#avatar-SetAvatarOut)
+    - [SetSocietyAvatarIn](#avatar-SetSocietyAvatarIn)
+    - [SetSocietyAvatarOut](#avatar-SetSocietyAvatarOut)
   
     - [AvatarService](#avatar-AvatarService)
   
@@ -55,6 +60,21 @@
 
 
 
+<a name="avatar-DeleteSocietyAvatarIn"></a>
+
+### DeleteSocietyAvatarIn
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| avatar_id | [int32](#int32) |  |  |
+
+
+
+
+
+
 <a name="avatar-GetAllAvatarsIn"></a>
 
 ### GetAllAvatarsIn
@@ -73,6 +93,36 @@
 <a name="avatar-GetAllAvatarsOut"></a>
 
 ### GetAllAvatarsOut
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| avatar_list | [Avatar](#avatar-Avatar) | repeated |  |
+
+
+
+
+
+
+<a name="avatar-GetAllSocietyAvatarsIn"></a>
+
+### GetAllSocietyAvatarsIn
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| uuid | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="avatar-GetAllSocietyAvatarsOut"></a>
+
+### GetAllSocietyAvatarsOut
 
 
 
@@ -116,6 +166,38 @@
 
 
 
+
+<a name="avatar-SetSocietyAvatarIn"></a>
+
+### SetSocietyAvatarIn
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| uuid | [string](#string) |  |  |
+| filename | [string](#string) |  |  |
+| batch | [bytes](#bytes) |  |  |
+
+
+
+
+
+
+<a name="avatar-SetSocietyAvatarOut"></a>
+
+### SetSocietyAvatarOut
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| link | [string](#string) |  |  |
+
+
+
+
+
  
 
  
@@ -133,6 +215,9 @@
 | SetAvatar | [SetAvatarIn](#avatar-SetAvatarIn) stream | [SetAvatarOut](#avatar-SetAvatarOut) |  |
 | GetAllAvatars | [GetAllAvatarsIn](#avatar-GetAllAvatarsIn) | [GetAllAvatarsOut](#avatar-GetAllAvatarsOut) |  |
 | DeleteAvatar | [DeleteAvatarIn](#avatar-DeleteAvatarIn) | [Avatar](#avatar-Avatar) |  |
+| SetSocietyAvatar | [SetSocietyAvatarIn](#avatar-SetSocietyAvatarIn) stream | [SetSocietyAvatarOut](#avatar-SetSocietyAvatarOut) |  |
+| GetAllSocietyAvatars | [GetAllSocietyAvatarsIn](#avatar-GetAllSocietyAvatarsIn) | [GetAllSocietyAvatarsOut](#avatar-GetAllSocietyAvatarsOut) |  |
+| DeleteSocietyAvatar | [DeleteSocietyAvatarIn](#avatar-DeleteSocietyAvatarIn) | [Avatar](#avatar-Avatar) |  |
 
  
 

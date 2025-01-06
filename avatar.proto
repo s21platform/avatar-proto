@@ -8,6 +8,10 @@ service AvatarService {
   rpc SetAvatar(stream SetAvatarIn) returns (SetAvatarOut){};
   rpc GetAllAvatars(GetAllAvatarsIn) returns (GetAllAvatarsOut){};
   rpc DeleteAvatar(DeleteAvatarIn) returns (Avatar){};
+
+  rpc SetSocietyAvatar(stream SetSocietyAvatarIn) returns (SetSocietyAvatarOut){};
+  rpc GetAllSocietyAvatars(GetAllSocietyAvatarsIn) returns (GetAllSocietyAvatarsOut){};
+  rpc DeleteSocietyAvatar(DeleteSocietyAvatarIn) returns (Avatar){};
 }
 
 message SetAvatarIn {
@@ -34,5 +38,27 @@ message GetAllAvatarsOut {
 }
 
 message DeleteAvatarIn {
+  int32 avatar_id = 1;
+}
+
+message SetSocietyAvatarIn {
+  string uuid = 1;
+  string filename = 2;
+  bytes batch = 3;
+}
+
+message SetSocietyAvatarOut {
+  string link = 1;
+}
+
+message GetAllSocietyAvatarsIn {
+  string uuid = 1;
+}
+
+message GetAllSocietyAvatarsOut {
+  repeated Avatar avatar_list = 1;
+}
+
+message DeleteSocietyAvatarIn {
   int32 avatar_id = 1;
 }
